@@ -1,0 +1,9 @@
+mov     eax,0x100
+mov     ebx,0x30
+sub     eax,ebx
+inc     ebx
+inc     eax
+inc     ebx
+dec     eax
+pop     ebp
+ret

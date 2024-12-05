@@ -1,0 +1,20 @@
+mov     eax, 0x60
+mov     ebx, 0x15
+mov     ecx, 0x20
+add     eax, ebx
+xor     ebx, ecx
+cmp     eax, 0x50
+or      eax
+je      .L1
+cmp     eax, 0x75
+je      .L2
+pop     rbp
+ret
+
+.L1
+add     eax, 0x10
+
+.L2
+sub     eax, 0x20
+
+
