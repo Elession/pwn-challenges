@@ -1,7 +1,3 @@
-## MCQ
-make a question about address size in diff binaries
-
-
 ## Practice
 1. simple ROP (got a lot of variations actually)
 2. ret2csu

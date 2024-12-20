@@ -1,4 +1,4 @@
-/* gcc -m32 -std=c99 -fno-stack-protector -z execstack -no-pie -o overflow overflowme.c */
+/* gcc -m32 -std=c99 -fno-stack-protector -z execstack -no-pie -o baby_BOF_bin baby_BOF.c */
 #include <stdio.h>
 #include <signal.h>
 #include <string.h>

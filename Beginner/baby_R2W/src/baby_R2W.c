@@ -1,6 +1,6 @@
+/* gcc -fno-stack-protector -z execstack -no-pie -o baby_R2W_bin baby_R2W.c */
+
 #include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 
 void win() {
     //How do I get here??
@@ -8,8 +8,8 @@ void win() {
 }
 
 void vuln() {
-    char buffer[20];
-    printf("Enter some text: ");
+    char buffer[32];
+    printf("Enter some text: \n");
 
     //BOF vulnerability here
     gets(buffer); 
