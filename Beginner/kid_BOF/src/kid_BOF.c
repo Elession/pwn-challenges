@@ -11,7 +11,7 @@ void pizza(int sig) {
     FILE *file = fopen("flag.txt", "r");
     char flag[256];
     fgets(flag, 256, file);
-    print("%s", flag);
+    printf("%s", flag);
     fclose(file);
     exit(1);
 }

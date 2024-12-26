@@ -71,6 +71,7 @@ baby_R2W.c
 baby_R2W_bin
 
 ## Resources
-
+https://ir0nstone.gitbook.io/notes/binexp/stack/ret2win
 
 ## Flag
+TBD

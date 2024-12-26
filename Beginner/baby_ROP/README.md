@@ -31,7 +31,7 @@ What we need to find:
 3. Gadgets
 
 #### To find the offset needed:
-1. use `cyclic 100` in pwndb (this generates the de bruijin sequence)
+1. use `cyclic 100` in pwndbg (this generates the de bruijin sequence)
 2. `break main` and run the program (C)
 3. you should see that the `RSP` pointer contains `faaaaaaa` and beyond. We just need the first 8 bytes because that is where the return address is.
 
@@ -75,8 +75,8 @@ Before we return to the `win` function, we want to prepare the registers first s
 from pwn import *
 
 # setup process
-p = process("./test64")
-context.binary = "./test64"
+p = process("./baby_ROP_bin")
+context.binary = "./baby_ROP_bin"
 
 # address of win function
 win_addr = p64(0x400537)
@@ -110,13 +110,13 @@ Refer to solve.py
 3. Consider the order of your ROP chain. (What must go in first?)
 
 ## Attached Files
-baby_ROP.c
-baby_ROP_bin
+- baby_ROP.c
+- baby_ROP_bin
 
 ## Resources
-https://ctf101.org/binary-exploitation/what-are-calling-conventions/
-https://ctf101.org/binary-exploitation/return-oriented-programming/
-https://book.hacktricks.xyz/binary-exploitation/rop-return-oriented-programing
+- https://ctf101.org/binary-exploitation/what-are-calling-conventions/
+- https://ctf101.org/binary-exploitation/return-oriented-programming/
+- https://book.hacktricks.xyz/binary-exploitation/rop-return-oriented-programing
 
 
 ## Flag

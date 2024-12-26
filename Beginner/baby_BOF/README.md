@@ -36,11 +36,11 @@ Refer to solve.py.
 1.  Have you considered saved edp address?
 
 ## Attached Files
-baby_BOF.c
-baby_BOF_bin
+- baby_BOF.c
+- baby_BOF_bin
 
 ## Resources
-http://ctf101.org
+- http://ctf101.org
 
 ## Flag
 `MACCTF{25}`

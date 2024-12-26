@@ -82,16 +82,15 @@ Refer to solve.py
 1. which part of the code has a vulnerable C function?
 2. check out sendafter: https://gist.github.com/zafirr31/bc37cacae5540d865de164f9ea16b679
 
+## Attached Files
+- baby_R2W.c
+- baby_R2W_bin
 
 ## Resources
-https://ir0nstone.gitbook.io/notes/binexp/stack/ret2win
-https://gist.github.com/zafirr31/bc37cacae5540d865de164f9ea16b679
-https://docs.pwntools.com/en/dev/tubes.html
+- https://ir0nstone.gitbook.io/notes/binexp/stack/ret2win
+- https://gist.github.com/zafirr31/bc37cacae5540d865de164f9ea16b679
+- https://docs.pwntools.com/en/dev/tubes.html
 
-
-## Attached Files
-baby_R2W.c
-baby_R2W_bin
 
 ## Flag
-refer to flag.txt
+TBD

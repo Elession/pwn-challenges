@@ -5,7 +5,7 @@ baby_BOF
 Understand simple buffer overflow and `gets` vulnerability.
 
 ## Description 
-We have a buffer overflow exercise here. Identify the exact offset that the binary overflows. Put the offset in `MACCTF{answer}` format
+Order me more pizzas.
 
 ## Difficulty:
 Guided (Easy)
@@ -13,15 +13,15 @@ Guided (Easy)
 ## Guide
 Source code looks fairly long but it is a simple code, let's try to highlight the main points:
 
-1. When a segmentation fault is triggered while binary is running, it will run the sigsegv_trigger function , which contains the flag.
-2. `vuln` function is called, which asks for a input of 20 bytes. It also has the vulnerable c function `gets`, which allows us to buffer overflow.
+1. When a segmentation fault is triggered while binary is running, it will run the `pizza` function , which will read the flag
+2. `burger` function is called, which asks for a input of 200 bytes. It also has the vulnerable c function `gets`, which allows us to buffer overflow.
 
-What to consider:
-1. buffer (20 bytes)
-2. saved edp address (4 bytes) 
+We can try to do this: 
 
-To overflow, we thus need to send at least 25 bytes of input.
-
+#### To find the offset needed:
+1. use `cyclic 300` in pwndbg (this generates the de bruijin sequence)
+2. `break main` and run the program (C)
+3. you should see that the `RSP` pointer contains `caaaaaab` and beyond. We just need the first 8 bytes because that is where the return address is.
 
 ```sh
 pwndbg> cyclic -l caaaaaab
@@ -36,11 +36,11 @@ Refer to solve.py.
 1.  Have you considered saved edp address?
 
 ## Attached Files
-baby_BOF.c
-baby_BOF_bin
+- kid_BOF.c
+- kid_BOF_bin
 
 ## Resources
-http://ctf101.org
+- http://ctf101.org
 
 ## Flag
-`MACCTF{25}`
+TBD
