@@ -128,8 +128,8 @@ kid_ROP_bin
 
 ## Resources
 - https://ctf101.org/binary-exploitation/what-are-calling-conventions/
-- ttps://ctf101.org/binary-exploitation/return-oriented-programming/
-- tps://book.hacktricks.xyz/binary-exploitation/rop-return-oriented-programing
+- https://ctf101.org/binary-exploitation/return-oriented-programming/
+- https://book.hacktricks.xyz/binary-exploitation/rop-return-oriented-programing
 
 
 ## Flag

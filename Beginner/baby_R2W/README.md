@@ -64,14 +64,12 @@ Refer to solve.py
 ## Hints
 1. https://ir0nstone.gitbook.io/notes/binexp/stack/ret2win
 
-
-
 ## Attached Files
-baby_R2W.c
-baby_R2W_bin
+- baby_R2W.c
+- baby_R2W_bin
 
 ## Resources
-https://ir0nstone.gitbook.io/notes/binexp/stack/ret2win
+- https://ir0nstone.gitbook.io/notes/binexp/stack/ret2win
 
 ## Flag
 TBD

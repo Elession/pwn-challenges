@@ -6,7 +6,12 @@
 
 void sigsegv_trigger(int sig) {
     printf("Segmentation Fault!\n");
-    printf("Here is your flag: MACCTF{REDACTED}\n");
+    printf("Here is your flag: \n");
+    FILE *file = fopen("flag.txt", "r");
+    char flag[256];
+    fgets(flag, 256, file);
+    printf("%s", flag);
+    fclose(file);
     exit(1);
 }
 

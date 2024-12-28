@@ -6,11 +6,11 @@ RUN useradd -u 8888 -m pwn
 RUN mkdir -p /home/pwn
 RUN chown -R pwn:pwn /home/pwn
 
-# if you wanna compile in docker.
+# compile in docker.
 ADD source.c /home/pwn/source.c
 RUN gcc -m32 -o /home/pwn/pwnie-warmup /home/pwn/source.c -fno-stack-protector -z execstack
 
-# if you got precompiled binary
+# precompiled binary
 ADD ./pwnbin /home/pwn/pwnbin
 RUN chmod +x /home/pwn/pwnbin
 WORKDIR /home/pwn

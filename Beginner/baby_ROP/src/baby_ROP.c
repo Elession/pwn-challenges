@@ -4,6 +4,11 @@
 void win(int a, int b) {
     if (a == 0x1337 && b == 0xdead) {
         printf("You completed the ROP exercise!\n");
+        FILE *file = fopen("flag.txt", "r");
+        char flag[256];
+        fgets(flag, 256, file);
+        printf("%s", flag);
+        fclose(file);
     }
 }
 

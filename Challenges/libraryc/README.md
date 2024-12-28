@@ -24,6 +24,20 @@ We are given the source code, binary and the libc. We notice the following with 
 
 NX protection is enabled, which indicates we cannot push any shellcode onto the stack directly (no ret2shellcode, gotta do ROP).
 
+#### Before starting
+
+When a libc is provided, we can use a tool called `pwninit` to help us install the needed files and and relink the libc to the one provided.
+https://github.com/io12/pwninit
+
+Do the following:
+```sh
+./pwninit --bin libraryc --lib libc.so.6
+```
+
+This should provide you with the newly installed libc and linker.
+
+#### Analysis
+
 Looking at the source code: 
 1. The code takes input of 64 bytes. However, `scanf("%s", thought)`, which does not have any boundary checking, thus has BOF vulnerability.
 2. There is no other functions.
@@ -289,8 +303,6 @@ p.sendline(payload2)
 p.interactive()
 ```
 
-
-
 ## Solution
 refer to solve.py
 
@@ -298,13 +310,14 @@ refer to solve.py
 2. might wanna check out: https://stackoverflow.com/questions/54393105/libcs-system-when-the-stack-pointer-is-not-16-padded-causes-segmentation-faul
 
 ## Attached Files
-libraryc
-libraryc.c
-libc.so.6
+- libraryc
+- libraryc.c
+- libc.so.6
 
 ## Resources
-https://book.hacktricks.xyz/binary-exploitation/rop-return-oriented-programing/ret2lib
-https://book.hacktricks.xyz/binary-exploitation/rop-return-oriented-programing/ret2lib/rop-leaking-libc-address
-https://systemoverlord.com/2017/03/19/got-and-plt-for-pwning.html
+- https://book.hacktricks.xyz/binary-exploitation/rop-return-oriented-programing/ret2lib
+- https://book.hacktricks.xyz/binary-exploitation/rop-return-oriented-programing/ret2lib/rop-leaking-libc-address
+- https://systemoverlord.com/2017/03/19/got-and-plt-for-pwning.html
 
 ## Flag
+TBD
