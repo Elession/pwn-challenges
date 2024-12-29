@@ -8,6 +8,7 @@ void win() {
 }
 
 void vuln() {
+
     char buffer[32];
     printf("Enter some text: \n");
 
@@ -16,6 +17,11 @@ void vuln() {
 }
 
 int main() {
+    //ignore this
+    setvbuf(stdout, NULL, _IONBF, 0);
+    setvbuf(stdin, NULL, _IONBF, 0);
+    setvbuf(stderr, NULL, _IONBF, 0);
+    
     vuln();
     return 0;
 }

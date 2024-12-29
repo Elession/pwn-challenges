@@ -1,4 +1,4 @@
-/* gcc -m32 -std=c99 -fno-stack-protector -z execstack -no-pie -o baby_BOF_bin baby_BOF.c */
+/* gcc -fno-stack-protector -no-pie -o chall chall.c */
 #include <stdio.h>
 #include <signal.h>
 #include <string.h>
@@ -28,6 +28,11 @@ void vuln() {
 }
 
 int main() {
+    //ignore this
+    setvbuf(stdout, NULL, _IONBF, 0);
+    setvbuf(stdin, NULL, _IONBF, 0);
+    setvbuf(stderr, NULL, _IONBF, 0);
+    
     // runs sigsegv_trigger() when a segmentation fault occurs
     signal(SIGSEGV, sigsegv_trigger);
     

@@ -7,10 +7,11 @@ RUN mkdir -p /home/pwn
 RUN chown -R pwn:pwn /home/pwn
 
 # compile in docker.
-ADD source.c /home/pwn/source.c
-RUN gcc -m32 -o /home/pwn/pwnie-warmup /home/pwn/source.c -fno-stack-protector -z execstack
+# ADD source.c /home/pwn/source.c
+# RUN gcc -m32 -o /home/pwn/pwnie-warmup /home/pwn/source.c -fno-stack-protector -z execstack
 
 # precompiled binary
+ADD ./flag.txt /home/pwn/pwnbin
 ADD ./pwnbin /home/pwn/pwnbin
 RUN chmod +x /home/pwn/pwnbin
 WORKDIR /home/pwn
