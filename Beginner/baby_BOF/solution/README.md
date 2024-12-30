@@ -22,12 +22,6 @@ What to consider:
 
 To overflow, we thus need to send at least 25 bytes of input.
 
-## Manual solution
-```shell
-# send 25 bytes of input
-./BOF_compiled
-AAAAAAAAAAAAAAAAAAAAAAAAA
-```
 
 ## Solution
 Refer to solve.py.
@@ -36,8 +30,8 @@ Refer to solve.py.
 1.  Have you considered saved edp address?
 
 ## Attached Files
-- baby_BOF.c
-- baby_BOF_bin
+- chall.c
+- chall
 
 ## Resources
 - http://ctf101.org
