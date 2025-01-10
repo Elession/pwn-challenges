@@ -1,3 +1,4 @@
+/* gcc -fno-stack-protector -no-pie -o chall chall.c */
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -16,16 +17,13 @@ int keg(const char *beans) {
     return 0;
 }
 
-
 void harvest() {
-    char value[100];
-    char preharvest[] = "notgood";
-
-    printf("It's time to harvest my crops!");
-    scanf("%s", value);
-    keg(preharvest);
+    char beans[10] = "notgood";
+    char condition[20];
+    printf("How are the beans doing? \n");
+    gets(condition);
+    keg(beans);
 }
-
 
 int main()
 {

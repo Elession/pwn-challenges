@@ -1,10 +1,5 @@
 from pwn import *
 
-#p = gdb.debug("./chall",'''
-#break *0x4005af
-#continue
-#''')
-
 p = remote("IP", PORT)
 
 # ROP prep

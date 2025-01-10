@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  babybof:
+    build:
+      context: ./babybof
+      dockerfile: Dockerfile
+    ports:
+      - "10001:8881"
+    container_name: babybof
+
+  babyr2w:
+    build:
+      context: ./babyr2w
+      dockerfile: Dockerfile
+    ports:
+      - "10002:8882"
+    container_name: babyr2w
+
+  babyrop:
+    build:
+      context: ./babyrop
+      dockerfile: Dockerfile
+    ports:
+      - "10003:8883"
+    container_name: babyrop
+
+  kidbof:
+    build:
+      context: ./kidbof
+      dockerfile: Dockerfile
+    ports:
+      - "10004:8884"
+    container_name: kidbof
+
+  kidr2w:
+    build:
+      context: ./kidr2w
+      dockerfile: Dockerfile
+    ports:
+      - "10005:8885"
+    container_name: kidrop
+
+  kidrop:
+    build:
+      context: ./kidrop
+      dockerfile: Dockerfile
+    ports:
+      - "10006:8886"
+    container_name: kidrop
+
+  coffeebean:
+    build:
+      context: ./coffeebean
+      dockerfile: Dockerfile
+    ports:
+      - "10007:8887"
+    container_name: coffeebean
+
+  iridium:
+    build:
+      context: ./iridium
+      dockerfile: Dockerfile
+    ports:
+      - "10008:8888"
+    container_name: iridium
+
+  libraryc:
+    build:
+      context: ./libraryc
+      dockerfile: Dockerfile
+    ports:
+      - "10009:8889"
+    container_name: libraryc
+
+  PIEfect:
+    build:
+      context: ./piefect
+      dockerfile: Dockerfile
+    ports:
+      - "10010:8890"
+    container_name: piefect   

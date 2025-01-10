@@ -14,14 +14,4 @@
 `docker logs <container id>`
 
 
-stuff need to test still
-- port forwarding from VM to host
-- MIGHT test host to public
-- Docker compose to deploy all images with configured ports
-    - ports can do avail range
-    - volume (directory)
-
-
-2 options for .yaml
-1. create new images
-2. use existing images to build container
+## Docker ports used

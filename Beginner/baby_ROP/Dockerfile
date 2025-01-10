@@ -12,4 +12,4 @@ ADD ./chall /home/pwn/chall
 RUN chmod +x /home/pwn/chall
 WORKDIR /home/pwn
 
-CMD ["tcpserver","-t","50","-u","8888","-g","8888","-RHl0","0.0.0.0","8881","/home/pwn/chall"]
+CMD ["tcpserver","-t","50","-u","8888","-g","8888","-RHl0","0.0.0.0","8883","/home/pwn/chall"]
