@@ -80,3 +80,19 @@ services:
     ports:
       - "10010:8890"
     container_name: piefect   
+
+  breakthebank:
+    build:
+      context: ./breakthebank
+      dockerfile: Dockerfile
+    ports:
+      - "10011:8891"
+    container_name: breakthebank
+
+  rollthedice:
+    build:
+      context: ./rollthedice
+      dockerfile: Dockerfile
+    ports:
+      - "10012:8892"
+    container_name: rollthedice

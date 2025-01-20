@@ -47,7 +47,8 @@ In this case, we would want to perform an attack via the shared library provided
 
 We want to call functions straight from the libc library and build our own exploit.
 
-libc by default has **ASLR** enabled, which means the functions will always run at a different address.
+libc by default has **ASLR** enabled, which means the functions will always run at a different address. (This is to prevent attackers from easily accessing libc functions and running malicious code).
+
 Instead, what we can do is to leak the address of the function on runtime.
 
 To do that, we need to understand what **PLT** and **GOT** is.
@@ -315,8 +316,8 @@ refer to solve.py
 - libc.so.6
 
 ## Resources
-- https://book.hacktricks.xyz/binary-exploitation/rop-return-oriented-programing/ret2lib
-- https://book.hacktricks.xyz/binary-exploitation/rop-return-oriented-programing/ret2lib/rop-leaking-libc-address
+- https://book.hacktricks.wiki/en/binary-exploitation/rop-return-oriented-programing/ret2lib/index.html
+- https://book.hacktricks.wiki/en/binary-exploitation/rop-return-oriented-programing/ret2lib/rop-leaking-libc-address/index.html
 - https://systemoverlord.com/2017/03/19/got-and-plt-for-pwning.html
 
 ## Flag

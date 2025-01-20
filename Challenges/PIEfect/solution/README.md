@@ -13,7 +13,7 @@ Easy
 ## Guide
 Let's look at the main part of the source code.
 
-```py
+```c
 void decision() {
     char final[100];
     printf("Alright! I've made up my mind. \n");

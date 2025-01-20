@@ -41,16 +41,16 @@ This is because the program will catch if the bank amount is between 0 to -10000
 So what can we do then?
 
 ### Integer overflow
-This happens when you try to exceed the value that is meant for the integer type assigned to a variable. In this case:
+This happens when you try to exceed the value that is meant for the integer type assigned to a variable. In this case, we want to overflow this value:
 
 ```c
 signed bank_amt = 100000;
 ```
 
 ### Signed integer
-`Signed` integers can be both positive and negative values. But using bits and bytes, how can there be negative numbers?
+`Signed` integers can be both positive and negative values. But with `1`s and `0`s, how can there be negative numbers?
 
-Since `signed` integers (in this case is 4 bytes in size), it will allocate the upper half (2 bytes) to negative integers.
+This is because `signed` integers allocate the **upper** half of its space to negative integers.
 
 ```sh
 # Signed 4 byte integer
@@ -60,6 +60,8 @@ Dec: 2,147,483,647
 
 Hex: 0x80000000
 Dec: -2,147,483,648
+
+# means anything beyond 0x7FFFFFFF is negative
 ```
 
 ### What can we do?

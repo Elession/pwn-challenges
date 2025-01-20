@@ -69,7 +69,7 @@ void hackerChoice(){
 
 
 void bankStatus() {
-    printf("-----------EVIL MEGACORP BANK-----------\n");
+    printf("-----------LOANING TRANSCTIONS-----------\n");
     printf("Bank Amount: %d\n", bank_amt);
     printf("----------------------------------------\n");
     printf("\n");
