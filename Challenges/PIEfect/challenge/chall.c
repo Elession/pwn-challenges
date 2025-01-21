@@ -21,7 +21,7 @@ void decision() {
 
 void suggest() {
     char buffer[40]; 
-    printf("Suggest me a flavour: \n");
+    printf("Suggest me a flavour to try before I decide: \n");
     fgets(buffer, sizeof(buffer), stdin);
     printf("Here's a taste: \n");
     printf(buffer);

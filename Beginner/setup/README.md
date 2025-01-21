@@ -32,7 +32,6 @@ Examples of distributions include:
 
 and etc...
 
-
 ### Kali Linux
 Kali distro is tailored towards penetration testing. Kali is the distro we will be using for the exercises/challenges. 
 
@@ -55,12 +54,27 @@ After you have done so, you can drag and drop `setup.sh` from your host into the
 
 If the system prompts for service restart, just press `enter` to accept.
 
+### Brief explaination on tools you will be using
+Visual studio code - same code editor but on Linux, enter `code-oss` in your terminal to access it
+
+pwntools - python library for exploit development/CTF
+
+Pwndbg - additional features & QoL changes for debugging programs
+
+ROPgadgets - find gadgets in your programs (for later exercises)
+
+pwninit - automates finding linker for relevant libc version (for later exercises)
+
+### Once done
+Go to your terminal and enter the following:
+1. `nc SERVICE PORT`
+2. when prompted, read the introduction and enter accordingly
 
 ## Solution
-
+1. netcat service and type `READY` 
 
 ## Hints
-
+NIL
 
 ## Attached Files
 - setup.sh
@@ -73,3 +87,4 @@ If the system prompts for service restart, just press `enter` to accept.
 - https://github.com/io12/pwninit
 
 ## Flag
+TBD

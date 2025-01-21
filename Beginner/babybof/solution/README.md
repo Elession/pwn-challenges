@@ -11,17 +11,42 @@ We have a buffer overflow exercise here. Identify the exact offset that the bina
 Guided (Easy)
 
 ## Guide
-Source code looks fairly long but it is a simple code, let's try to highlight the main points:
+Let's look at the source code:
 
-1. When a segmentation fault is triggered while binary is running, it will run the sigsegv_trigger function , which contains the flag.
-2. `vuln` function is called, which asks for a input of 20 bytes. It also has the vulnerable c function `gets`, which allows us to buffer overflow.
+In `main`:
 
-In other programs, there will be other items on the stack as well. 
+```c
+    // runs sigsegv_trigger() when a segmentation fault occurs
+    signal(SIGSEGV, sigsegv_trigger);
+```
 
-Which is why we will learn to find the number of bytes to overflow ourselves
+From the code comment, we need to trigger a **segmentation fault** to run `sigsegv_trigger` function.
 
 
-#### To find the offset needed:
+In `sigsegv_trigger`:
+
+```c
+    printf("Here is your flag: \n");
+    FILE *file = fopen("flag.txt", "r");
+    char flag[256];
+    fgets(flag, 256, file);
+    printf("%s", flag);
+    fclose(file);
+```
+
+This will give us our flag. This begs the question...
+
+### What is Segmentation Fault?
+
+This is an error that occurs when a program attempts to access memory that is not permitted to the user. 
+
+For example: reading/writing outside given boundaries (aka Buffer overflow)
+
+
+
+
+
+### To find the offset needed:
 1. use `cyclic 100` in pwndbg (this generates the de bruijin sequence)
 2. `break main` to set a breakpoint at main
 3. `c` or `continue` to continue running program after breakpoint.
@@ -47,4 +72,4 @@ Refer to solve.py.
 - http://ctf101.org
 
 ## Flag
-`MACCTF{25}`
+TBD
