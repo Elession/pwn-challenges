@@ -25,3 +25,5 @@ git clone https://github.com/pwndbg/pwndbg
 cd pwndbg
 ./setup.sh
 
+echo echo "[*] Setup is complete"
+

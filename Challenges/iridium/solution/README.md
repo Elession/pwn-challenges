@@ -13,7 +13,7 @@ Hard
 ## Guide
 From the source code, 
 1. `iridium` has size of 100 bytes
-2. `read(0, iridium, 0x100);` - this reads `0x100` or **256** bytes into buffer. (more than iridium). Thus excess bytes allows us to do buffer overflow.
+2. `read(0, iridium, 0x100);` - this reads `0x100` or **256** bytes into buffer. (more than `iridium`). Thus excess bytes allows us to do buffer overflow.
 
 We do not have any functions to overflow into, nor is there any shell written in code.
 
@@ -35,6 +35,8 @@ These are only used when the binary is executed, and are separate files from the
 
 Library codes are stored within the binary when compiled. Hence, the binary can be executed without external files.
 
+In our case, since we do not have an external library to call our functions, we can instead perform **Linux syscalls** ourselves.
+
 ### Linux syscall table
 With this information, we can do something called **ret2syscall**. This requires the use of the linux syscall table. [Here.](https://chromium.googlesource.com/chromiumos/docs/+/master/constants/syscalls.md)
 
@@ -49,9 +51,9 @@ syscall
 ```
 
 ### Plan
-1. Find padding needed to buffer overflow
-2. Find gadgets needed
-3. Find writable location
+1. Find padding needed to overwrite return address
+2. Find addresses of gadgets needed
+3. Find writable location for `/bin/sh`
 4. move shell into writable location
 5. run syscall
 
@@ -69,7 +71,7 @@ Found at offset 120
 
 
 ### Step 2
-Let's find the gadgets we need.
+Let's find the addresses of the gadgets we need.
 
 ```sh
 $> ROPgadget --binary chall | grep -E ": pop (rdi|rsi|rdx|rax) ; ret" | grep -v "retf"
@@ -85,7 +87,7 @@ $> ROPgadget --binary chall | grep ": syscall"
 ```
 
 ### Step 3
-We need to find a writable location of the binary in memory. That is where we will put the shell payload (also because we cannot run shellcode directly due to NX protection).
+We need to find a writable location of the binary in memory. That is where we will put the shell command (also because we cannot run shellcode directly due to NX protection).
 
 Run the following in pwndbg after running the program:
 

@@ -43,4 +43,4 @@ RUN chmod +r /home/pwn/flag.txt
 RUN chmod +x /home/pwn/chall
 WORKDIR /home/pwn
 
-CMD sh -c 'tcpserver -t 50 -u 8888 -g 8888 -RHl0 0.0.0.0 80 /home/pwn/chall'
+CMD sh -c 'tcpserver -t 50 -u 8888 -g 8888 -RHl0 0.0.0.0 10000 /home/pwn/chall'

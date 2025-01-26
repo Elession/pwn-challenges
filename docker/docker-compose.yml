@@ -6,7 +6,7 @@ services:
       context: ./babybof
       dockerfile: Dockerfile
     ports:
-      - "10001:8881"
+      - ""
     container_name: babybof
 
   babyr2w:
@@ -14,7 +14,7 @@ services:
       context: ./babyr2w
       dockerfile: Dockerfile
     ports:
-      - "10002:8882"
+      - ""
     container_name: babyr2w
 
   babyrop:
@@ -22,7 +22,7 @@ services:
       context: ./babyrop
       dockerfile: Dockerfile
     ports:
-      - "10003:8883"
+      - ""
     container_name: babyrop
 
   kidbof:
@@ -30,7 +30,7 @@ services:
       context: ./kidbof
       dockerfile: Dockerfile
     ports:
-      - "10004:8884"
+      - ""
     container_name: kidbof
 
   kidr2w:
@@ -38,7 +38,7 @@ services:
       context: ./kidr2w
       dockerfile: Dockerfile
     ports:
-      - "10005:8885"
+      - ""
     container_name: kidrop
 
   kidrop:
@@ -46,7 +46,7 @@ services:
       context: ./kidrop
       dockerfile: Dockerfile
     ports:
-      - "10006:8886"
+      - ""
     container_name: kidrop
 
   coffeebean:
@@ -54,7 +54,7 @@ services:
       context: ./coffeebean
       dockerfile: Dockerfile
     ports:
-      - "10007:8887"
+      - ""
     container_name: coffeebean
 
   iridium:
@@ -70,7 +70,7 @@ services:
       context: ./libraryc
       dockerfile: Dockerfile
     ports:
-      - "10009:8889"
+      - ""
     container_name: libraryc
 
   PIEfect:
@@ -78,7 +78,7 @@ services:
       context: ./piefect
       dockerfile: Dockerfile
     ports:
-      - "10010:8890"
+      - ""
     container_name: piefect   
 
   breakthebank:
@@ -86,7 +86,7 @@ services:
       context: ./breakthebank
       dockerfile: Dockerfile
     ports:
-      - "10011:8891"
+      - ""
     container_name: breakthebank
 
   rollthedice:
@@ -94,5 +94,5 @@ services:
       context: ./rollthedice
       dockerfile: Dockerfile
     ports:
-      - "10012:8892"
+      - ""
     container_name: rollthedice

@@ -12,9 +12,9 @@ RUN mkdir -p /home/pwn
 RUN chown -R pwn:pwn /home/pwn
 
 RUN git clone https://github.com/Elession/pwn-challenges.git /home/pwn
-RUN mv /home/pwn/Beginner/kidr2w/challenge/chall /home/pwn
-RUN mv /home/pwn/Beginner/kidr2w/challenge/chall.c /home/pwn
-RUN mv /home/pwn/Beginner/kidr2w/challenge/flag.txt /home/pwn
+RUN mv /home/pwn/Challenges/PIEfect/challenge/chall /home/pwn
+RUN mv /home/pwn/Challenges/PIEfect/challenge/chall.c /home/pwn
+RUN mv /home/pwn/Challenges/PIEfect/challenge/flag.txt /home/pwn
 RUN rm -r /home/pwn/Beginner
 RUN rm -r /home/pwn/Challenges
 RUN rm -r /home/pwn/docker

