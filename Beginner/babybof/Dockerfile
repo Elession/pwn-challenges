@@ -1,16 +1,29 @@
-FROM ubuntu:18.04
+FROM ubuntu:24.04
 RUN apt-get update
-RUN apt-get install -y ucspi-tcp-ipv6 gcc
+RUN apt-get update && apt-get install -y \
+    gcc \
+    git \
+    build-essential \
+    ucspi-tcp \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -u 8888 -m pwn
 RUN mkdir -p /home/pwn
 RUN chown -R pwn:pwn /home/pwn
 
-ADD ./challenge/flag.txt /home/pwn/flag.txt
-ADD ./challenge/chall.c /home/pwn/chall.c
-RUN gcc -fno-stack-protector -no-pie -o /home/pwn/chall /home/pwn/chall.c
+RUN git clone https://github.com/Elession/pwn-challenges.git /tmp
+RUN mv /tmp/Beginner/babybof/challenge/chall /home/pwn
+RUN mv /tmp/Beginner/babybof/challenge/chall.c /home/pwn
+RUN mv /tmp/Beginner/babybof/challenge/flag.txt /home/pwn
+RUN rm -r /tmp/Beginner
+RUN rm -r /tmp/Challenges
+RUN rm -r /tmp/docker
+RUN rm /tmp/Template.md
+RUN rm /tmp/README.md
+
+
 RUN chmod +r /home/pwn/flag.txt
 RUN chmod +x /home/pwn/chall
 WORKDIR /home/pwn
 
-CMD sh -c 'echo "${FLAG_VALUE}" > /home/pwn/flag.txt && tcpserver -t 50 -u 8888 -g 8888 -RHl0 0.0.0.0 4040 /home/pwn/chall'"]
+CMD sh -c 'echo "${FLAG_VALUE}" > /home/pwn/flag.txt && tcpserver -t 50 -u 8888 -g 8888 -RHl0 0.0.0.0 4040 /home/pwn/chall'

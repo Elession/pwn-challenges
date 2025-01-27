@@ -11,20 +11,19 @@ RUN useradd -u 8888 -m pwn
 RUN mkdir -p /home/pwn
 RUN chown -R pwn:pwn /home/pwn
 
-RUN git clone https://github.com/Elession/pwn-challenges.git /home/pwn
-RUN mv /home/pwn/Challenges/coffeebean/challenge/chall /home/pwn
-RUN mv /home/pwn/Challenges/coffeebean/challenge/chall.c /home/pwn
-RUN mv /home/pwn/Challenges/coffeebean/challenge/flag.txt /home/pwn
-RUN rm -r /home/pwn/Beginner
-RUN rm -r /home/pwn/Challenges
-RUN rm -r /home/pwn/docker
-RUN rm /home/pwn/Template.md
-RUN rm /home/pwn/README.md
+RUN git clone https://github.com/Elession/pwn-challenges.git /tmp
+RUN mv /tmp/Beginner/coffeebean/challenge/chall /home/pwn
+RUN mv /tmp/Beginner/coffeebean/challenge/chall.c /home/pwn
+RUN mv /tmp/Beginner/coffeebean/challenge/flag.txt /home/pwn
+RUN rm -r /tmp/Beginner
+RUN rm -r /tmp/Challenges
+RUN rm -r /tmp/docker
+RUN rm /tmp/Template.md
+RUN rm /tmp/README.md
 
 
 RUN chmod +r /home/pwn/flag.txt
 RUN chmod +x /home/pwn/chall
 WORKDIR /home/pwn
 
-CMD sh -c 'echo "${FLAG_VALUE}" > /home/pwn/flag.txt && tcpserver -t 50 -u 8888 -g 8888 -RHl0 0.0.0.0 CMD sh -c 'echo "${FLAG_VALUE}" > /home/pwn/flag.txt && tcpserver -t 50 -u 8888 -g 8888 -RHl0 0.0.0.0 4040 /home/pwn/chall'
- /home/pwn/chall'
+CMD sh -c 'echo "${FLAG_VALUE}" > /home/pwn/flag.txt && tcpserver -t 50 -u 8888 -g 8888 -RHl0 0.0.0.0 4040 /home/pwn/chall'
