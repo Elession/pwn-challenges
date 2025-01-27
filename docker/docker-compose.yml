@@ -81,13 +81,13 @@ services:
       - ""
     container_name: piefect   
 
-  breakthebank:
+  freeofcharge:
     build:
-      context: ./breakthebank
+      context: ./freeofcharge
       dockerfile: Dockerfile
     ports:
       - ""
-    container_name: breakthebank
+    container_name: freeofcharge
 
   rollthedice:
     build:
@@ -96,3 +96,25 @@ services:
     ports:
       - ""
     container_name: rollthedice
+  
+  setup:
+    build:
+      context: ./setup
+      dockerfile: Dockerfile
+    ports:
+      - ""
+    container_name: setup
+  
+  pancakes:
+    build:
+      context: ./pancakes
+      dockerfile: Dockerfile
+    ports:
+      - ""
+    container_name: pancakes
+
+  
+ 
+
+
+
