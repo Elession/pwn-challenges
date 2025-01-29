@@ -10,7 +10,7 @@ Expain the use of each tool
 The start of your pwn journey.
 
 ## Difficulty:
-easy
+guided (intro)
 
 ## Guide
 From the challenge/exercise description, download `setup.sh` script. We will be using this in your Kali virtual machine (VM).

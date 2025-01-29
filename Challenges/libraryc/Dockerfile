@@ -14,6 +14,8 @@ RUN git clone https://github.com/Elession/pwn-challenges.git /tmp
 RUN mv /tmp/Challenges/libraryc/challenge/chall /home/pwn
 RUN mv /tmp/Challenges/libraryc/challenge/chall.c /home/pwn
 RUN mv /tmp/Challenges/libraryc/challenge/flag.txt /home/pwn
+RUN mv /tmp/Challenges/libraryc/challenge/ld-2.39.so /home/pwn
+RUN mv /tmp/Challenges/libraryc/challenge/libc.so.6 /home/pwn
 RUN rm -rf /tmp/*
 RUN rm -r /tmp/.git
 RUN chmod +r /home/pwn/flag.txt

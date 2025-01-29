@@ -24,7 +24,7 @@ We are given the source code, binary and the libc. We notice the following with 
 
 NX protection is enabled, which indicates we cannot push any shellcode onto the stack directly (no ret2shellcode, gotta do ROP).
 
-#### Before starting
+### Before starting
 
 When a libc is provided, we can use a tool called `pwninit` to help us install the needed files and and relink the libc to the one provided.
 https://github.com/io12/pwninit
@@ -36,7 +36,7 @@ Do the following:
 
 This should provide you with the newly installed libc and linker.
 
-#### Analysis
+### Analysis
 
 Looking at the source code: 
 1. The code takes input of 64 bytes. However, `scanf("%s", thought)`, which does not have any boundary checking, thus has BOF vulnerability.
@@ -56,8 +56,8 @@ To do that, we need to understand what **PLT** and **GOT** is.
 https://systemoverlord.com/2017/03/19/got-and-plt-for-pwning.html
 
 tldr; 
-PLT is used to call functions that do not have addresses until runtime.
-GOT contains address of dynamically-linked functions (libc address).
+We can call functions using `function@plt`
+GOT contains address of dynamically-linked functions (libc address), which is what we want to leak.
 
 What we can do is to leak a function's address by accomplishing the following:
 
@@ -90,14 +90,14 @@ GOT protection: Partial RELRO | Found 3 GOT entries passing the filter
 
 Essentially, we can use any of the following, but for this example, we will use puts@got.
 
-#### How to leak libc address
+### How to leak libc address
 We are going to build our ROPchain to leak the address. It would look something like this.
 
 `padding + pop_rdi + puts@got + puts@plt + return to main`
 
 Why return to `main`? This is because we need the program to continue running to show the leaked address.
 
-#### Calculate offset
+### Calculate offset
 BOF & get the offset:
 ```sh
 pwndbg> cyclic -l jaaaaaaa
@@ -105,7 +105,7 @@ Finding cyclic pattern of 8 bytes: b'jaaaaaaa' (hex: 0x6a61616161616161)
 Found at offset 72
 ```
 
-#### ROPgadget
+### ROPgadget
 We need `rdi` register to pass the argument.
 
 ```sh
@@ -113,7 +113,7 @@ $> ROPgadget --binary chall_patched | grep "pop rdi"
 0x0000000000400653 : pop rdi ; ret
 ```
 
-#### Script to leak libc
+### Script to leak libc
 ```py
 from pwn import *
 
@@ -144,12 +144,12 @@ When u run the script you should see something like this:
 [*] puts@libc leak address: 0x7fa463687bd0
 ```
 
-#### Now we have a leak, so what?
+### Now we have a leak, so what?
 Now that we have a leaked address, we use it to calculate for libc base address. This can help us find addresses of functions we want to use for our exploit.
 
 In this case we want to call our own shell (`/bin/sh`) using `system` to grab the flag.
 
-#### Finding offsets of functions
+### Finding offsets of functions
 
 ```sh
 objdump -T libc.so.6 | grep -E "(system$|puts$)"
@@ -162,18 +162,16 @@ strings -t x libc.so.6 | grep "/bin/sh"
  1cb42f /bin/sh
 ```
 
-
-#### Finding addresses
+### Finding addresses
 To find libc base address:
 
-libc addr = `puts@libc` leak - offset of `puts`
+libc addr = `puts@libc` leak (or whichever addresses of `function@got` you used) - offset of `puts`
 
 for the rest of the functions, we can just use the base address and add their relative offset
 
 function = libc addr + offset of function
 
-
-#### Now we have everything, how do we put it together?
+### Now we have everything, how do we put it together?
 Since our current script just returns back to main, we can perform another ROP chain to execute a shell this time.
 
 `padding + pop rdi + /bin/sh + system`
@@ -240,17 +238,17 @@ $
 
 So why is that?
 
-#### Number 1 common issue of any Pwn challenges: Stack alignment
+### Number 1 common issue of any Pwn challenges: Stack alignment
 
 https://systemoverlord.com/2017/03/19/got-and-plt-for-pwning.html
 
 Essentially, before a `call` function is done, RSP has to be 16-bytes aligned. Otherwise, it will cause errors to occur.
 
 There are 2 ways to solve this:
-1. Ensure you pad the rest of your payload to 16 bytes
-2. add a `ret` address before system is called  
+1. Ensure you pad the rest of your payload to fit 16 bytes alignment
+2. add a `ret` address before system is called (`ret` will help to reset the stack alignment) 
 
-In this case i have done number 2.
+In this case I have done number 2 (and is probably the most used).
 
 #### Final solution
 ```py

@@ -3,7 +3,7 @@ RUN apt-get update
 RUN apt-get update && apt-get install -y \
     gcc \
     git \
-    ucspi-tcp-ipv6 \
+    ucspi-tcp \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -u 8888 -m pwn

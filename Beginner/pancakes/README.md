@@ -8,7 +8,7 @@ Understand stack concepts
 Basics of pwn 101 Part 1
 
 ## Difficulty:
-Guided (easy)
+Guided (intro)
 
 ## Guide
 One of the important concepts when solving pwn challenges is the **stack memory**.
@@ -43,13 +43,6 @@ Let's say `C` needs to be used or needs to get off the stack. We will then **POP
 :-:
 |A| 
 
-In actual practice, if there's an instruction like:
-
-`pop rax`
-
-`rax` register will then hold the value of `C` after it pops off the stack.
-
-
 ### PUSH
 We want to store another value, `D` for later use. Let's **PUSH** it onto the stack using the first example.
 
@@ -58,14 +51,6 @@ We want to store another value, `D` for later use. Let's **PUSH** it onto the st
 |C|
 |B|
 |A| 
-
-In actual practice, if there's an instruction like:
-
-`push rax`
-
-whichever address/value that `rax` register holds, goes onto the stack, which is saved for later use.
-
-
 
 ### How to view the stack/common misconception
 When everyone is learning about the stack, there is always this confusion:
@@ -80,27 +65,22 @@ In stack, the bottom of the stack always has a **higher** address, and the top o
 
 For example:
 
-Let's say each item on the stack is 8 bytes long and the bottom of the stack starts at `C` at `0x100`
+Let's say each item on the stack is 8 bytes long and the start of the stack starts at `A` at `0x100`
 
-This means `C` has a **higher** address.
+This means `A` has a **higher** address.
 
 |C|
 :-:
 |B|
 |A| 
 
-`B` would then be at a lower address of `0xF8` (`0x100` - 8 = `0x0F8`).
+`B` would then be at a lower address of `0xF8` (`0x100` - `0x8` = `0x0F8`).
 
-Similarly, `A` would a lower address of `0xF0` (`0x0F8` - 8 = `0x0F0`).
-
+Similarly, `C` would a lower address of `0xF0` (`0x0F8` - `0x8` = `0x0F0`).
 
 
 ### Exercise
-
 Go to your terminal and netcat into the service provided in the exercise description
-
-
-
 
 ## Solution
 

