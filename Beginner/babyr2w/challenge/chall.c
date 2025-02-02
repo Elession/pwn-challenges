@@ -5,6 +5,11 @@
 void win() {
     //How do I get here??
     printf("Hello from win!\n");
+    FILE *file = fopen("flag.txt", "r");
+    char flag[256];
+    fgets(flag, 256, file);
+    printf("%s", flag);
+    fclose(file);
 }
 
 void vuln() {

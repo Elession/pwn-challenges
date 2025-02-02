@@ -1,5 +1,5 @@
 # Challenge Name
-baby_R2W
+babyr2w
 
 ## Learning Objective
 Extended from BOF. Learn to find and rewrite return address to another function
@@ -11,9 +11,12 @@ We want to win! But... how to win?
 Guided (easy)
 
 ## Guide
-In the code, you can see that `win` function is never called. We want to call this function.
+In the code, you can see that `win` function is never called. We want to call this function as it contains the flag.
 
-To perform ret2win, we need to overwrite the return address from `main` to `win` after `vuln` function finishes running.
+If you recall your basic buffer overflow practice, we overflowed the **saved base pointer address** to cause a segmentation fault. This time on top of that, we want to overwrite the return address.
+
+
+We will perform a technique called **ret2win**. The idea is overflow and rewrite the **return address** on the stack to another function
 
 #### What we need to do:
 1. Find the exact offset before it overflows
@@ -32,7 +35,7 @@ Found at offset 40
 
 #### To find the win address:
 ```shell
-$> objdump -d baby_R2W_bin | grep win
+$> objdump -d chall | grep win
 0000000000400797 <win>:
 ```
 

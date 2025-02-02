@@ -1,5 +1,5 @@
 # Challenge Name
-baby_BOF
+babybof
 
 ## Learning Objective
 Understand:
@@ -47,7 +47,7 @@ In `vuln`:
     gets(buffer);
 ```
 
-One of the most common C vulnerabilities. This function does not perform boundary checking, which means we can input as many bytes beyond its allocated size (thus buffer overflow).
+One of the most common C vulnerabilities. This function does not perform boundary checking, which means it will accept user input even if it is beyond allocated size.
 
 ### Buffer overflow
 
@@ -59,13 +59,18 @@ In programs, excess bytes will overflow into other values/addresses on the stack
 
 This is an error that occurs when a program attempts to access memory that is **not permitted to the user**. 
 
+
+
 For example: reading/writing outside given boundaries (aka Buffer overflow).
 
 There are 2 important addresses in a stack frame that is **not permitted** to us:
 1. saved base pointer (RBP) address
 2. return address
 
+**HOWEVER**, it is important to note that if you overwrite the addresses with a existing/valid address in the binary, it will continue running but with the overwritten address.
+
 Let's try to overflow the **base pointer address** since it is always closer to the buffer.
+
 
 ### Find number of bytes to overflow base pointer address
 

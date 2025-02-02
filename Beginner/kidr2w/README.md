@@ -1,5 +1,5 @@
 # Challenge Name
-kid_R2W
+kidr2w
 
 ## Learning Objective
 Extended from BOF. Learn to find and rewrite return address to another function
@@ -34,7 +34,7 @@ Found at offset 136
 
 #### To find the win address:
 ```shell
-$> objdump -d kid_R2W_bin | grep hiddenBlessing
+$> objdump -d chall | grep hiddenBlessing
 00000000004006d7 <hiddenBlessing>:
 ...
 ```

@@ -1,5 +1,5 @@
 # Challenge Name
-baby_ROP
+kidrop
 
 ## Learning Objective
 Learn Return Oriented Programming (ROP).
@@ -45,7 +45,7 @@ Found at offset 72
 
 #### To find `treasureChest` function address:
 ```sh
-$> objdump -d kid_ROP_bin | grep treasureChest
+$> objdump -d chall | grep treasureChest
 0000000000400727 <treasureChest>:
 ...
 ```
@@ -53,19 +53,19 @@ $> objdump -d kid_ROP_bin | grep treasureChest
 #### To find gadgets
 For `rdi` register:
 ```sh
-$> ROPgadget --binary kid_ROP_bin | grep "pop rdi"
+$> ROPgadget --binary chall | grep "pop rdi"
 0x00000000004008c3 : pop rdi ; ret
 ```
 
 For `rsi` register:
 ```sh
-$> ROPgadget --binary kid_ROP_bin | grep "pop rsi"
+$> ROPgadget --binary chall | grep "pop rsi"
 0x00000000004008c1 : pop rsi ; pop r15 ; ret
 ```
 
 For `rdx` register:
 ```sh
-$> ROPgadget --binary kid_ROP_bin | grep ": pop rdx"
+$> ROPgadget --binary chall | grep ": pop rdx"
 0x00000000004007f7 : pop rdx ; ret
 ```
 

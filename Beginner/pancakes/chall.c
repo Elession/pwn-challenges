@@ -19,7 +19,7 @@ void instructions() {
     printf("\n");
 
     char answer[20];
-    printf("What is the 2th and 4th item in the stack, starting from lower address? \n\n");
+    printf("What is the 2nd and 4th item in the stack, starting from lower address? \n\n");
 
     printf("Put your answer in (ans1_ans2) format: ");
     fgets(answer, sizeof(answer), stdin);

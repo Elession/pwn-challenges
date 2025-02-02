@@ -13,7 +13,7 @@ guided (intro)
 ## Guide
 What exactly are **registers**?
 
-They are actually computer memories that resides in yr CPU. This is to allows for the fastest access to memory.
+They are actually computer memories that resides in your CPU. This is to allows for the fastest access to memory.
 
 Each register is able to contain data (values, addresses, etc.). But we will categorise and talk about the more important registers.
 
@@ -74,7 +74,7 @@ Example:
 3 is finally added to `RAX`, and now `RIP` is pointing to the `0x40001` intruction. 
 
 ### Assembly Language
-For pwn basics, you can just use this [link](https://www.tutorialspoint.com/assembly_programming/assembly_basic_syntax.htm).
+For ASM basics, you can just use this [link](https://www.tutorialspoint.com/assembly_programming/assembly_basic_syntax.htm).
 
 Once you start to ascend and learn new concepts, there will be newer types of intructions, but they realistically won't be that daunting to learn.
 
@@ -92,7 +92,6 @@ none needed
 
 ## Resources
 - https://www.tutorialspoint.com/assembly_programming/assembly_basic_syntax.htm
-- 
 
 ## Flag
 TBD

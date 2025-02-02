@@ -205,7 +205,7 @@ Refer to solve.py
 
 ## Hints
 1. look up linux syscall tables
-2. 
+
 
 ## Attached Files
 - chall.c

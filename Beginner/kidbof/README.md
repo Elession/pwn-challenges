@@ -1,5 +1,5 @@
 # Challenge Name
-baby_BOF
+kidbof
 
 ## Learning Objective
 Understand simple buffer overflow and `gets` vulnerability.

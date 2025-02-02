@@ -1,5 +1,5 @@
 # Challenge Name
-baby_ROP
+babyrop
 
 ## Learning Objective
 Learn Return Oriented Programming (ROP).
@@ -43,20 +43,20 @@ Found at offset 40
 
 #### To find the `win` address:
 ```sh
-$> objdump -d baby_ROP_bin | grep win
+$> objdump -d chall | grep win
 0000000040537 <win>:
 ```
 
 #### To find gadgets
 For `rdi` register:
 ```sh
-$> ROPgadget --binary baby_ROP_bin | grep rdi
+$> ROPgadget --binary chall | grep rdi
 0x0000000000400603 : pop rdi ; ret
 ```
 
 For `rsi` register:
 ```sh
-$> ROPgadget --binary baby_ROP_bin | grep rsi
+$> ROPgadget --binary chall | grep rsi
 0x0000000000400601 : pop rsi ; pop r15 ; ret
 ```
 

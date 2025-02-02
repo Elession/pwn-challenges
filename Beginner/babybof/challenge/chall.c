@@ -7,6 +7,8 @@
 void sigsegv_trigger(int sig) {
     printf("Segmentation Fault!\n");
     printf("Here is your flag: \n");
+    
+    // reads the flag content
     FILE *file = fopen("flag.txt", "r");
     char flag[256];
     fgets(flag, 256, file);

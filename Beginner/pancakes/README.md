@@ -76,7 +76,22 @@ This means `A` has a **higher** address.
 
 `B` would then be at a lower address of `0xF8` (`0x100` - `0x8` = `0x0F8`).
 
-Similarly, `C` would a lower address of `0xF0` (`0x0F8` - `0x8` = `0x0F0`).
+Similarly, `C` would at a lower address of `0xF0` (`0x0F8` - `0x8` = `0x0F0`).
+
+
+### Function calls
+
+Whenever a function is called, your stack will look something like this:
+
+|buffer|
+:-:
+|saved base pointer of caller|
+|return address of caller| 
+|function arguments|
+
+1 function call = 1 stack frame
+
+This is a fundamental concept that will used in binary exploitatio A LOT.
 
 
 ### Exercise
