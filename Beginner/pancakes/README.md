@@ -14,14 +14,14 @@ Guided (intro)
 One of the important concepts when solving pwn challenges is the **stack memory**.
 
 ### What is the stack memory?
-It actually resides in your RAM in your computer. There are also other things in the memory but we will focus on this for now.
+It actually resides in your RAM in your computer. There are other things in the memory but we will focus on this for now.
 
 You can imagine the stack as like the exercise name - a pancake stack.
 
 How does it work then?
 
 ### Last-In First Out (LIFO)
-The stack uses the **LIFO** method to process the memory. What this means it is newer values on the stack are always taken out first. (See next section)
+The stack uses the **LIFO** method to process the memory. What this means is that it is newer values on the stack are always taken out first. (See next section)
 
 
 ### PUSH/POP
@@ -89,9 +89,11 @@ Whenever a function is called, your stack will look something like this:
 |return address of caller| 
 |function arguments|
 
+Function arguments will be placed on the stack first, followed by the return address of caller
+
 1 function call = 1 stack frame
 
-This is a fundamental concept that will used in binary exploitatio A LOT.
+This is a fundamental concept that will used in binary exploitation A LOT.
 
 
 ### Exercise

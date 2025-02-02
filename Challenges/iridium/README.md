@@ -60,7 +60,7 @@ syscall
 ### Step 1 
 To find the offset needed:
 1. use `cyclic 200` in pwndbg (this generates the de bruijin sequence)
-2. `break main` and run the program (C)
+2. Enter `run` to execute the program
 3. you should see that the `RSP` pointer contains `paaaaaaa` and beyond. We just need the first 8 bytes because that is where the return address is.
 
 ```shell
