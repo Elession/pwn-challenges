@@ -31,7 +31,7 @@ What we need to find:
 3. Gadgets
 
 #### To find the offset needed:
-1. use `cyclic 100` in pwndbg (this generates the de bruijin sequence)
+1. use `cyclic 100` in pwndbg (this generates the de bruijn sequence)
 2. `break main` and run the program (C)
 3. you should see that the `RSP` pointer contains `faaaaaaa` and beyond. We just need the first 8 bytes because that is where the return address is.
 

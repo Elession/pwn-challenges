@@ -10,9 +10,6 @@ echo "[*] Installing python3, pwntools, ROPgadget, wget"
 sudo apt install -y python3 python3-pip python3-dev git libssl-dev libffi-dev build-essential python3.13 python3.13-venv wget
 sudo pip install pwntools --break-system-packages
 
-echo "[*] Installing Visual Studio Code"
-sudo apt install -y code-oss
-
 echo "[*] Installing gdb"
 sudo apt install -y gdb
 

@@ -43,7 +43,7 @@ printf("%s", input)
 
 Vulnerable example:
 ```c
-print(input)
+printf(input)
 ```
 
 This allows users to access and leak memory off the stack. This is exactly what we will do to find addresses.
