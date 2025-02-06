@@ -1,117 +1,117 @@
-version: '3.8'
+# version: '3.8'
 
-services:
-  babybof:
-    build:
-      context: ./babybof
-      dockerfile: Dockerfile
-    ports:
-      - ""
-    container_name: babybof
+# services:
+#   babybof:
+#     build:
+#       context: ./babybof
+#       dockerfile: Dockerfile
+#     ports:
+#       - ""
+#     container_name: babybof
 
-  babyr2w:
-    build:
-      context: ./babyr2w
-      dockerfile: Dockerfile
-    ports:
-      - ""
-    container_name: babyr2w
+#   babyr2w:
+#     build:
+#       context: ./babyr2w
+#       dockerfile: Dockerfile
+#     ports:
+#       - ""
+#     container_name: babyr2w
 
-  babyrop:
-    build:
-      context: ./babyrop
-      dockerfile: Dockerfile
-    ports:
-      - ""
-    container_name: babyrop
+#   babyrop:
+#     build:
+#       context: ./babyrop
+#       dockerfile: Dockerfile
+#     ports:
+#       - ""
+#     container_name: babyrop
 
-  kidbof:
-    build:
-      context: ./kidbof
-      dockerfile: Dockerfile
-    ports:
-      - ""
-    container_name: kidbof
+#   kidbof:
+#     build:
+#       context: ./kidbof
+#       dockerfile: Dockerfile
+#     ports:
+#       - ""
+#     container_name: kidbof
 
-  kidr2w:
-    build:
-      context: ./kidr2w
-      dockerfile: Dockerfile
-    ports:
-      - ""
-    container_name: kidrop
+#   kidr2w:
+#     build:
+#       context: ./kidr2w
+#       dockerfile: Dockerfile
+#     ports:
+#       - ""
+#     container_name: kidrop
 
-  kidrop:
-    build:
-      context: ./kidrop
-      dockerfile: Dockerfile
-    ports:
-      - ""
-    container_name: kidrop
+#   kidrop:
+#     build:
+#       context: ./kidrop
+#       dockerfile: Dockerfile
+#     ports:
+#       - ""
+#     container_name: kidrop
 
-  coffeebean:
-    build:
-      context: ./coffeebean
-      dockerfile: Dockerfile
-    ports:
-      - ""
-    container_name: coffeebean
+#   coffeebean:
+#     build:
+#       context: ./coffeebean
+#       dockerfile: Dockerfile
+#     ports:
+#       - ""
+#     container_name: coffeebean
 
-  iridium:
-    build:
-      context: ./iridium
-      dockerfile: Dockerfile
-    ports:
-      - "10008:8888"
-    container_name: iridium
+#   iridium:
+#     build:
+#       context: ./iridium
+#       dockerfile: Dockerfile
+#     ports:
+#       - "10008:8888"
+#     container_name: iridium
 
-  libraryc:
-    build:
-      context: ./libraryc
-      dockerfile: Dockerfile
-    ports:
-      - ""
-    container_name: libraryc
+#   libraryc:
+#     build:
+#       context: ./libraryc
+#       dockerfile: Dockerfile
+#     ports:
+#       - ""
+#     container_name: libraryc
 
-  PIEfect:
-    build:
-      context: ./piefect
-      dockerfile: Dockerfile
-    ports:
-      - ""
-    container_name: piefect   
+#   PIEfect:
+#     build:
+#       context: ./piefect
+#       dockerfile: Dockerfile
+#     ports:
+#       - ""
+#     container_name: piefect   
 
-  freeofcharge:
-    build:
-      context: ./freeofcharge
-      dockerfile: Dockerfile
-    ports:
-      - ""
-    container_name: freeofcharge
+#   freeofcharge:
+#     build:
+#       context: ./freeofcharge
+#       dockerfile: Dockerfile
+#     ports:
+#       - ""
+#     container_name: freeofcharge
 
-  rollthedice:
-    build:
-      context: ./rollthedice
-      dockerfile: Dockerfile
-    ports:
-      - ""
-    container_name: rollthedice
+#   rollthedice:
+#     build:
+#       context: ./rollthedice
+#       dockerfile: Dockerfile
+#     ports:
+#       - ""
+#     container_name: rollthedice
   
-  setup:
-    build:
-      context: ./setup
-      dockerfile: Dockerfile
-    ports:
-      - ""
-    container_name: setup
+#   setup:
+#     build:
+#       context: ./setup
+#       dockerfile: Dockerfile
+#     ports:
+#       - ""
+#     container_name: setup
   
-  pancakes:
-    build:
-      context: ./pancakes
-      dockerfile: Dockerfile
-    ports:
-      - ""
-    container_name: pancakes
+#   pancakes:
+#     build:
+#       context: ./pancakes
+#       dockerfile: Dockerfile
+#     ports:
+#       - ""
+#     container_name: pancakes
 
   
  

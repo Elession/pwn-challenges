@@ -11,9 +11,9 @@ RUN mkdir -p /home/pwn
 RUN chown -R pwn:pwn /home/pwn
 
 RUN git clone https://github.com/Elession/pwn-challenges.git /tmp
-RUN mv /tmp/Beginner/babyr2w/challenge/chall /home/pwn
-RUN mv /tmp/Beginner/babyr2w/challenge/chall.c /home/pwn
-RUN mv /tmp/Beginner/babyr2w/challenge/flag.txt /home/pwn
+RUN mv /tmp/chall /home/pwn
+RUN mv /tmp/chall.c /home/pwn
+RUN mv /tmp/flag.txt /home/pwn
 RUN rm -rf /tmp/*
 RUN rm -r /tmp/.git
 RUN chmod +r /home/pwn/flag.txt
