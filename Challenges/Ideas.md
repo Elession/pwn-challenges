@@ -1,3 +1,5 @@
+# List of challenges
+
 ## Beginner
 - setup
 - pancakes
@@ -17,9 +19,3 @@
 - wheresmygadgets
 - iridium
 - libraryc
-
-
-
-## Stuff to do
-- slides
-- baby
