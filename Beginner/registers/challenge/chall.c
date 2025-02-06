@@ -1,3 +1,4 @@
+/* gcc -o chall chall.c */
 #include <stdio.h>
 #include <string.h>
 
@@ -19,7 +20,7 @@ void instructions() {
 
 
     char answer[20];
-    printf("What is the value in RBX and RSI? \n\n");
+    printf("What are the values in RBX and RSI after running the instructions above? \n\n");
 
     printf("Put your answer in (ans1_ans2) format: ");
     fgets(answer, sizeof(answer), stdin);
@@ -27,7 +28,7 @@ void instructions() {
     // Remove newline
     answer[strcspn(answer, "\n")] = '\0';
 
-    if (strcmp(answer, "0x8_0x0") == 0) {
+    if (strcmp(answer, "0x1257_0x8") == 0) {
         printf("Correct! Here's your flag:\n");
         flag();
     } else {

