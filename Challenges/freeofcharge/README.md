@@ -26,7 +26,7 @@ Read this for a better idea of this concept: [Link](https://www.cs.cornell.edu/~
 
 This is because `signed` integers allocate the **upper** half of its space to negative integers.
 
-```sh
+```shell
 # Short signed 2 byte integer
 
 Bin: 0111 1111 1111 1111

@@ -38,7 +38,7 @@ So when we exploit, we just use current time as the seed as well.
 
 We also need to note the location of the libc used for this challenge (native library for C functions). This is because the algorithm used for PRNG differs from python.
 
-```sh
+```shell
 $>ldd chall
         linux-vdso.so.1 (0x00007f11cb2dd000)
         libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f11cb0ce000)

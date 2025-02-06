@@ -81,7 +81,7 @@ From a bigger perspective, it means if we can figure out the **base address**, w
 ### Part 1
 Since we want to leak **addresses**, we want to use `%p`. (Refer to [this](https://www.geeksforgeeks.org/format-specifiers-in-c/))
 
-```sh
+```shell
 $> ./chall
 I can't decide which PIE to go with...
 Suggest me a flavour: 
@@ -119,7 +119,7 @@ This script does the following:
 2. loops 50 times to take 50 addresses off the stack
 
 We would then see the following results
-```sh
+```shell
 Address @0: %0$p
 Address @1: 0x7ff9af325643
 Address @2: (nil)
@@ -140,7 +140,7 @@ Address @13: 0x562a91e00a49
 You might be wondering: Which given we see above addresses do we use?
 
 You can do this to check (the binary must be running):
-```sh
+```shell
 # run this command if PIE is enabled
 pwndbg> piebase
 Calculated VA from <YOUR_DIR> = 0x555555400000
@@ -166,7 +166,7 @@ Alright! Now that we have a leaked address, we can calculate for offset of leake
 
 `PIE - leak address = offset of leaked addr`
 
-```sh
+```shell
 pwndbg> x 0x555555400a49 - 0x555555400000
 0xa49:  Cannot access memory at address 0xa49
 ```
@@ -178,7 +178,7 @@ pwndbg> x 0x555555400a49 - 0x555555400000
 ### Step 3
 With this, we just need to find the offset of `piefect` function.
 
-```sh
+```shell
 objdump -d chall | grep piefect
 00000000000008ea <piefect>:
 ```

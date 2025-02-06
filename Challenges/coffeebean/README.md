@@ -40,7 +40,7 @@ This time we will also set a breakpoint at `keg` function to check.
 ### strmcp in asm
 Before the program calls `strcmp`, `rsi` & `rdi` registers will point to the location of the 2 values that are being compared.
 
-```sh
+```shell
 rsi: value 1
 rdi: value 2
 call strcmp@plt 
@@ -53,7 +53,7 @@ Run the following in gdb:
 3. send a cyclic pattern of 30 when program asks for input (`cyclic 30`)
 
 You should see this in the disassembly:
-```sh
+```shell
    0x4007b0 <keg+25>    lea    rsi, [rip + 0x1d1]               RSI => 0x400988 ◂— jo 0x4009ef /* 'perfect' */
    0x4007b7 <keg+32>    mov    rdi, rax                         RDI => 0x7fffffffdc46 ◂— 'aadaaaaa'
    0x4007ba <keg+35>    call   strcmp@plt                  <strcmp@plt>
@@ -61,7 +61,7 @@ You should see this in the disassembly:
 
 We can see that the `rdi` register is pointing to our input. Let's check what is the offset we need.
 
-```sh
+```shell
 pwndbg> cyclic -l aadaaaaa
 Finding cyclic pattern of 8 bytes: b'aadaaaaa' (hex: 0x6161646161616161)
 Found at offset 22

